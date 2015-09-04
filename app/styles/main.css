@@ -1,24 +1,13 @@
 body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 800px;
   color: #333;
 }
 
-.hero-unit {
-  margin: 50px auto 0 auto;
-  width: 300px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
-}
-
-.hero-unit h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .browserupgrade {
@@ -26,4 +15,30 @@ body {
   background: #ccc;
   color: #000;
   padding: 0.2em 0;
+}
+
+path {
+    fill: none;
+    stroke: black;
+}
+
+#dtable {
+  position: relative;
+  float: left;
+  top: 20px;
+}
+
+#graph {
+  position: relative;
+  width: 400px;
+  float: right;
+}
+
+.alnright {
+  text-align: right;
+}
+
+.reg {
+    stroke: steelblue;
+    stroke-width: 2;
 }
