@@ -1,7 +1,7 @@
 /*global d3, MathJax*/
 'use strict';
 
-var id = 1, converged, iteration,
+var id = 1, converged, diverged, iteration,
     lr, theta0, theta1,
     svg, data;
 
@@ -45,16 +45,15 @@ function updateGraph() {
 
     var xscale = d3.scale.linear()
             .domain(d3.extent(data, function(d) { return d.values.x; }))
-            .range([40, width]).nice(),
+            .range([0, width]).nice(),
         yscale = d3.scale.linear()
             .domain(d3.extent(data, function(d) { return d.values.y; }))
-            .range([height - 10, 0]).nice();
+            .range([height, 0]).nice();
 
     if(svg.select('g.x.axis').empty()) {
         svg.append('g').attr('class', 'x axis')
             .attr('transform', 'translate(0,' + height + ')');
-        svg.append('g').attr('class', 'y axis')
-            .attr('transform', 'translate(30,0)');
+        svg.append('g').attr('class', 'y axis');
     }
 
     svg.select('g.x.axis').call(d3.svg.axis().scale(xscale).orient('bottom'));
@@ -68,23 +67,21 @@ function updateGraph() {
     points.attr('cx', function(d) { return xscale(d.values.x); })
         .attr('cy', function(d) { return yscale(d.values.y); })
         .on('mouseover', function(d) {
-            if(theta0 !== undefined) {
-                var pred = theta1 * d.values.x + theta0;
-                var p = svg.append('g').attr('class', 'pointer');
-                p.append('line')
-                    .attr('marker-end', 'url(#arrow)')
-                    .style('stroke', 'steelblue')
-                    .style('stroke-width', 2)
-                    .attr('x1', xscale(d.values.x))
-                    .attr('y1', yscale(d.values.y))
-                    .attr('x2', xscale(d.values.x))
-                    .attr('y2', yscale(pred));
-                p.append('text')
-                    .attr('text-anchor', 'middle')
-                    .attr('x', xscale(d.values.x))
-                    .attr('y', yscale(d.values.y) + (pred > d.values.y ? 25 : -15))
-                    .text('' + d3.round(d.values.y - pred, 4));
-            }
+            var pred = theta1 * d.values.x + theta0;
+            var p = svg.append('g').attr('class', 'pointer');
+            p.append('line')
+                .attr('marker-end', 'url(#arrow)')
+                .style('stroke', 'steelblue')
+                .style('stroke-width', 2)
+                .attr('x1', xscale(d.values.x))
+                .attr('y1', yscale(d.values.y))
+                .attr('x2', xscale(d.values.x))
+                .attr('y2', yscale(pred));
+            p.append('text')
+                .attr('text-anchor', 'middle')
+                .attr('x', xscale(d.values.x))
+                .attr('y', yscale(d.values.y) + (pred > d.values.y ? 25 : -15))
+                .text('' + d3.round(d.values.y - pred, 4));
         })
         .on('mouseout', function() {
             svg.select('.pointer').remove();
@@ -92,22 +89,19 @@ function updateGraph() {
 
     points.exit().remove();
 
-    if(theta0 !== undefined) {
-        var line = d3.svg.line().x(function(d) { return xscale(d.x); })
-                .y(function(d) { return yscale(d.y); });
-
-        var path = svg.selectAll('path.reg').data([getCoord(xscale.ticks(100))]);
-        path.enter().append('path').attr('class', 'reg');
-        path.attr('d', line);
-        path.exit().remove();
-    }
+    var line = d3.svg.line()
+                   .x(function(d) { return xscale(d.x); })
+                   .y(function(d) { return yscale(d.y); });
+    var path = svg.selectAll('path.reg').data([getCoord(xscale.ticks(100))]);
+    path.enter().append('path').attr('class', 'reg');
+    path.attr('d', line);
+    path.exit().remove();
 }
 
 function update(sse)
 {
     d3.select('#dtable')
-        .html('Iteration: ' + iteration + '<br/>' +
-              'Converged: ' + converged + '<br/>' +
+        .html('Iteration = ' + iteration + (converged ? ' (converged)' : (diverged ? ' (diverged)' : '')) + '<br/>' +
               '\\(\\theta_0 = ' + d3.round(theta0, 4) + '\\)<br/>' +
               '\\(\\theta_1 = ' + d3.round(theta1, 4) + '\\)<br/>' +
               '\\(SSE = ' + d3.round(sse, 2) + '\\)<br/>');
@@ -122,36 +116,53 @@ function init() {
     changeTheta0();
     changeTheta1();
     converged = false;
+    diverged = false;
     iteration = 0;
     var sse = d3.sum(data, function(d) { return Math.pow(d.values.y - (theta1 * d.values.x + theta0), 2); });
-	update(sse);
+    update(sse);
+    d3.select('#step').attr('disabled', null);
+    d3.select('#run').attr('disabled', null);
 }
 
 function gstep() {
-    if (!converged) {
-        iteration++;
-        var theta0grad = d3.sum(data, function(d) { return (d.values.y - (theta1 * d.values.x + theta0)); });
-        var theta0p = theta0 + lr * 2 * theta0grad;
-        var theta1grad = d3.sum(data, function(d) { return (d.values.y - (theta1 * d.values.x + theta0)) * d.values.x; });
-        var theta1p = theta1 + lr * 2 * theta1grad;
-        if (Math.abs(theta0p - theta0) < 1e-6 && Math.abs(theta1p - theta1) < 1e-6) {
-            converged = true;
-        }
-        theta0 = theta0p;
-        theta1 = theta1p;
-
-        var sse = d3.sum(data, function(d) { return Math.pow(d.values.y - (theta1 * d.values.x + theta0), 2); });
-        update(sse);
+    if (converged || diverged) {
+       d3.select('#step').attr('disabled', 'true');
+       d3.select('#run').attr('disabled', 'true');
+       return;
     }
+
+    iteration++;
+    var theta0grad = d3.sum(data, function(d) { return (d.values.y - (theta1 * d.values.x + theta0)); });
+    var theta0p = theta0 + lr * 2 * theta0grad;
+    var theta1grad = d3.sum(data, function(d) { return (d.values.y - (theta1 * d.values.x + theta0)) * d.values.x; });
+    var theta1p = theta1 + lr * 2 * theta1grad;
+
+    var dtheta0 = Math.abs(theta0p - theta0);
+    var dtheta1 = Math.abs(theta1p - theta1);
+
+    var convergence = 1e-6;
+    if (dtheta0 < convergence && dtheta1 < convergence) {
+        converged = true;
+    }
+    var divergence = 1e+6;
+    if (dtheta0 > divergence || dtheta1 > divergence) {
+        diverged = true;
+    }
+
+    theta0 = theta0p;
+    theta1 = theta1p;
+    var sse = d3.sum(data, function(d) { return Math.pow(d.values.y - (theta1 * d.values.x + theta0), 2); });
+    update(sse);
 }
 
 /*eslint-disable no-unused-vars*/
 function grun() {
 /*eslint-enable no-unused-vars*/
-    init();
-    while (!converged) {
+    while (!converged && !diverged) {
         gstep();
     }
+    // disable the buttons
+    gstep();
 }
 
 /*eslint-disable no-unused-vars*/
@@ -168,13 +179,13 @@ function changeDs() {
 }
 
 (function() {
-	data = dataset1;
+    data = dataset1;
 
     svg = d3.select('#graph')
         .append('svg')
         .attr('preserveAspectRatio', 'xMinYMin meet')
         .attr('viewBox', '0 0 700 700')
-        .append('g').attr('transform', 'translate(15,35)');
+        .append('g').attr('transform', 'translate(35,35)');
 
     svg.append('defs')
        .append('marker')
