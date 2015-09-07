@@ -1,6 +1,8 @@
 # Machine Learning
 
-Demo programs, based on https://github.com/larskotthoff/ml-demo
+http://zijpn.github.io/ml/
+
+Based on https://github.com/larskotthoff/ml-demo
 
 ### Yeoman scaffolding
 ```sh
