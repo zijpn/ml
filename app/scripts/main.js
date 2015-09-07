@@ -100,13 +100,13 @@ function updateGraph() {
 
 function update(sse)
 {
-    d3.select('#dtable')
+    d3.select('#values')
         .html('Iteration = ' + iteration + (converged ? ' (converged)' : (diverged ? ' (diverged)' : '')) + '<br/>' +
               '\\(\\theta_0 = ' + d3.round(theta0, 4) + '\\)<br/>' +
               '\\(\\theta_1 = ' + d3.round(theta1, 4) + '\\)<br/>' +
               '\\(SSE = ' + d3.round(sse, 2) + '\\)<br/>');
     /*eslint-disable new-cap*/
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'dtable']);
+    MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'values']);
     /*eslint-enable new-cap*/
     updateGraph();
 }

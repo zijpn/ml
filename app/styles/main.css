@@ -17,12 +17,7 @@ table {
   padding: 0.2em 0;
 }
 
-path {
-    fill: none;
-    stroke: black;
-}
-
-#dtable {
+#values {
   position: relative;
   float: left;
   top: 20px;
@@ -38,7 +33,12 @@ path {
   text-align: right;
 }
 
+path {
+  fill: none;
+  stroke: black;
+}
+
 .reg {
-    stroke: steelblue;
-    stroke-width: 2;
+  stroke: steelblue;
+  stroke-width: 2;
 }

@@ -78,7 +78,7 @@
 
     <br/>
 
-    <div id="dtable"></div>
+    <div id="values"></div>
     <div id="graph"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -91,8 +91,10 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
+    <!-- https://github.com/mathjax/mathjax-docs/wiki/Hide-render-statusbar -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
+        messageStyle: "none",
         extensions: ["tex2jax.js"],
         TeX: {
           extensions: ["AMSmath.js","AMSsymbols.js"]
@@ -101,7 +103,8 @@
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"] ],
           displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true
+          processEscapes: true,
+          preview: "none"
         },
         "HTML-CSS": { availableFonts: ["TeX"] }
       });
