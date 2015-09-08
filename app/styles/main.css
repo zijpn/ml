@@ -17,6 +17,10 @@ table {
   padding: 0.2em 0;
 }
 
+.border th, .border td {
+  border: 1px solid black;
+}
+
 #values {
   position: relative;
   float: left;
