@@ -2,7 +2,9 @@
   "name": "ml",
   "private": true,
   "dependencies": {
-    "d3": "~3.5.6"
+    "bootstrap-css": "~3.3.4",
+    "d3": "~3.5.6",
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
     "chai": "~3.2.0",
