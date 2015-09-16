@@ -1,5 +1,7 @@
 # Machine Learning
 
+[![Build Status](https://travis-ci.org/zijpn/ml.svg?branch=master)](https://travis-ci.org/zijpn/ml)
+
 http://zijpn.github.io/ml/
 
 Based on https://github.com/larskotthoff/ml-demo
