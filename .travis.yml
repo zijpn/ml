@@ -3,9 +3,23 @@ language: node_js
 node_js:
   - 0.12
 
+branches:
+  only:
+    - master
+
+env:
+  global:
+    - secure: "wwZj3MxORs7wdXCdyIthI4vHpz+XXWvT3J/EjIzAN56U2OBhr7MN5+58AhhbUuV2reW3i+J/290z0aObSMD9Aq4vq4cmapL6Io/MlqYiyhCHf9J4JlwzowoB+gN+tQeEKo8JHMvN1RHknoqWNydvWzvRYFGsv5k/elStpn8STHA6XJgtUYtPUA0pOCiVgF4+hetF74xZTMULakUatYKV1OtePTfzRFySCR9r4J54RUygXFeuRYxX4X62eLBcMDKMasuHcf2QxPb6Sz0FRLILJkRF5tRcluIx+l+9Sh9RD+CqRu6FUB+RBj9AOl07QkkOUdqhb49xOfF3e4F8rYaAPI9SmUgGkDVR6Cn8Z0arvCIvCtiXt/zbuXk/7+FBhwCTOFJrL7qxPn5TchGLDMywwVC6V9ms06CECvz7OEYPCQbyia845ev8pb9AeODKE9qFEFHwCgejszbJUivrTfbTzs+3kyhecK8djRV0NyV7fNAJ/S82Qff1iOq8Dcrmpg1o/GYtlkd0/7EdCHuFx4WvGtnI5kIlH1b+z3BDVztPfDEnxnglRf2TVYyHcfheAIILgGnkxz8EocK0NQdXqUtC9POCwCVxyRPv869tuf/RmWbpNpCCJwesM1ZIg1vaHk6FmkvkA4v2if8q2MKiXNln2y787G8aZhk3LY7rCI6AkFA="
+    - GH_OWNER: zijpn
+    - GH_PROJECT_NAME: ml
+
 before_script:
   - npm install -g gulp bower
 
 script:
   - bower install
   - gulp
+
+after_success:
+  - ls -l dist
+  - env
