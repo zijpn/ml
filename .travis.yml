@@ -25,7 +25,7 @@ after_success:
   - cd site
   - git rm -r .
   - cp -R ../dist/* .
-  - cp ../dist/.htaccess .
+  - ls -la
   - git add .
   - git config user.email ""
   - git config user.name ${GH_OWNER}
