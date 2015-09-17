@@ -25,10 +25,9 @@ after_success:
   - cd site
   - git rm -r .
   - cp -R ../dist/* .
-  - ls -la
   - git add .
   - git config user.email ""
-  - git config user.name ${GH_OWNER}
+  - git config user.name "travis"
   - git commit -am "Deploy build to gh-pages [ci skip]"
   # Any command using GH_OAUTH_TOKEN must pipe the output to /dev/null (to not expose your oauth token)
   - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1

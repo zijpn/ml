@@ -48,40 +48,60 @@
       <table class="table table-bordered">
         <tr>
           <th>Hypothesis</th>
-          <th>Cost Function</th>
-          <th>Gradient Descent</th>
         </tr>
         <tr>
-          <td>$$ h_\theta(x) = \theta_0 + \theta_1 x $$</td>
-          <td>$$ J(\theta_0, \theta_1) = \dfrac {1}{2m} \displaystyle \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 $$</td>
           <td>$$ \begin{align*}
-                 \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) \\
-                 \theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x^{(i)}) - y^{(i)}) x^{(i)}\right)
+                 h_\theta(x) &= \theta^{T} x \\ x_0 &= 1
                  \end{align*}
               $$</td>
         </tr>
         <tr>
-          <td>$$ h_\theta(x) = \theta^{T} x \\
-              x_0 = 1
+          <th>Regularized Cost Function</th>
+        </tr>
+        <tr>
+          <td>$$ \begin{align*}
+                 J(\theta) &= \dfrac {1}{2m} \left[ \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 + \lambda \sum _{j=1}^n \theta_j^2 \right] \\
+                           &= \dfrac {1}{2m} \left[ (X\theta - y)^T (X\theta - y) + \lambda \theta^{T}\theta \right]
+                 \end{align*}
               $$</td>
-          <td>$$ J(\theta) = \dfrac {1}{2m} \displaystyle (X\theta - y)^T (X\theta - y) \\
-                 \begin{array}{cc}
-                 X = \left[
-                   \begin{array}{c}
-                     (x^{(1)})^T\\
-                     \vdots\\
-                     (x^{(m)})^T\\
-                   \end{array}
-                 \right]
-                 &
-                 x_0^{(i)} = 1
-                 \end{array}
+        </tr>
+        <tr>
+          <th>Gradient Descent</th>
+        </tr>
+        <tr>
+          <td>$$ \begin{align*}
+                 \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
+                 \theta_j := & \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
+                 &(j=1,...n)
+                 \end{align*}
               $$</td>
-          <td>$$ \theta := \theta - \alpha \frac{1}{m} X^T(X\theta - y) $$</td>
+        </tr>
+        <tr>
+          <th>Normal Equation</th>
+        </tr>
+        <tr>
+          <td>$$ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
+                           0\\
+                           & 1\\
+                           &  & \ddots\\
+                           &  &  & 1\end{array}\right])^{-1}X^{T}y$$</td>
         </tr>
       </table>
+
       <table class="table">
-        <thead class="form-inline">
+        <thead>
+          <tr>
+            <th>Example with $ n = 1, m = 6, \lambda = 0 $</th>
+          </tr>
+          <tr>
+            <td>$$ \begin{align*}
+                   h_\theta(x) &= \theta_0 + \theta_1 x \\ 
+                   J(\theta_0, \theta_1) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2
+                   \end{align*}
+                $$</td>
+          </tr>
+        </thead>
+        <tbody class="form-inline">
           <tr>
             <td>
               <label>Learning rate \(\alpha\)</label>
@@ -90,21 +110,22 @@
               <input type="text" class="form-control" id="theta0" size=4 value="0" onchange="changeTheta0()">
               <label>Initial \(\theta_1\)</label>
               <input type="text" class="form-control" id="theta1" size=4 value="0" onchange="changeTheta1()">
-            </td>
-            <td>
               <select id="dataset" class="form-control" onchange="changeDs()">
                 <option value="data1">Dataset 1</option>
                 <option value="data2">Dataset 2</option>
               </select>
             </td>
-            <td class="pull-right">
+          </tr>
+          <tr>
+            <td>
               <input type="button" class="btn btn-default" id="init" value="Init" onclick="init()">
               <input type="button" class="btn btn-default" id="step" value="Step" onclick="gstep()">
               <input type="button" class="btn btn-default" id="run" value="Run" onclick="grun()">
             </td>
           </tr>
-        </thead>
+        </tbody>
       </table>
+
       <div id="values"></div>
       <div id="graph"></div>
     </div>
