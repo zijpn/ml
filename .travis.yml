@@ -9,7 +9,7 @@ branches:
 
 env:
   global:
-    - secure: "wwZj3MxORs7wdXCdyIthI4vHpz+XXWvT3J/EjIzAN56U2OBhr7MN5+58AhhbUuV2reW3i+J/290z0aObSMD9Aq4vq4cmapL6Io/MlqYiyhCHf9J4JlwzowoB+gN+tQeEKo8JHMvN1RHknoqWNydvWzvRYFGsv5k/elStpn8STHA6XJgtUYtPUA0pOCiVgF4+hetF74xZTMULakUatYKV1OtePTfzRFySCR9r4J54RUygXFeuRYxX4X62eLBcMDKMasuHcf2QxPb6Sz0FRLILJkRF5tRcluIx+l+9Sh9RD+CqRu6FUB+RBj9AOl07QkkOUdqhb49xOfF3e4F8rYaAPI9SmUgGkDVR6Cn8Z0arvCIvCtiXt/zbuXk/7+FBhwCTOFJrL7qxPn5TchGLDMywwVC6V9ms06CECvz7OEYPCQbyia845ev8pb9AeODKE9qFEFHwCgejszbJUivrTfbTzs+3kyhecK8djRV0NyV7fNAJ/S82Qff1iOq8Dcrmpg1o/GYtlkd0/7EdCHuFx4WvGtnI5kIlH1b+z3BDVztPfDEnxnglRf2TVYyHcfheAIILgGnkxz8EocK0NQdXqUtC9POCwCVxyRPv869tuf/RmWbpNpCCJwesM1ZIg1vaHk6FmkvkA4v2if8q2MKiXNln2y787G8aZhk3LY7rCI6AkFA="
+    - secure: "forZZ0jHMGDmjaiOthXwq90UYZo2mSxvH3ixg/k3wpzZffFZ+YLRCvZEHczs/IlWUiwFi6CAJTu9CEIWl+IMVUdv7T+USzLEdYaGz9swfMkvXcaju897OmQsw7E4WH5jvEtYvlhferbCk5iIo75gDdQAeUsnQw6MAltZX8F7WJqNt9e6vvJDRa0vlLCILYax+7Z0FiZhlVv+qWg6F/+C5JB1IvVZRXtr8txdmC+AwvdlbqzuEai7O1P65NVmA0n9VYFTYLFA59m+kJ8zCgC52YSFfpVrQUu38R9BrKXayGU9sw0L0Lm3YIivSCCnJ7W3s2x+KIimION4gUwzOOmM0XorhYgvim6lpgXHTRevzrh9Q/7P5uN+4jQfgpW9sEbIQS6h1sEHRgiP5MkaSUbZBp0hDVV/L7xTYt6pzRXBGTmZIKMr2wO0fCPPTEQgNO9h4lBHPQM+ftbfGqmVamjUiKkQOu1L0MHak1WOkM2xb2nKvT+9uHJK5EVZLPF1/JlLLyWWmxQ2bnsxXDiyO0KhOQkytJ74MYbZ29jJuCSP1+ZxYp3GK7EVsaQy++uOdYEw/9VMnnJX0TZMqLYBHl9b1NpkkYwoNMjbx2WZnoIsD1DdcNFalvTX6a1IcYx/9LrqahC2BQglJzuXLUdBZkUzg70PHfb7okymBDvHWbi+oKI="
     - GH_OWNER: zijpn
     - GH_PROJECT_NAME: ml
 
@@ -21,5 +21,14 @@ script:
   - gulp
 
 after_success:
-  - ls -l dist
-  - env
+  - git submodule add -b gh-pages https://github.com/${GH_OWNER}/${GH_PROJECT_NAME} site
+  - cd site
+  - git rm -r .
+  - cp -R ../dist/* .
+  - cp ../dist/.htaccess .
+  - git add .
+  - git config user.email ""
+  - git config user.name "Nico Verzijp"
+  - git commit -am "Deploy build to gh-pages [ci skip]"
+  # Any command using GH_OAUTH_TOKEN must pipe the output to /dev/null (to not expose your oauth token)
+  - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
