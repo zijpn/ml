@@ -111,7 +111,7 @@ function update(sse)
     updateGraph();
 }
 
-function init() {
+function ginit() {
     changeLr();
     changeTheta0();
     changeTheta1();
@@ -175,7 +175,7 @@ function changeDs() {
     else if (ds === 'data2') {
         data = dataset2;
     }
-    init();
+    ginit();
 }
 
 (function() {
@@ -200,5 +200,5 @@ function changeDs() {
        .style('stroke', 'none')
        .attr('d', 'M0,-5L10,0L0,5');
 
-    init();
+    ginit();
 })();

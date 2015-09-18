@@ -21,9 +21,6 @@
 
   </head>
   <body>
-    <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -45,28 +42,27 @@
     </nav>
 
     <div class="container">
-      <table class="table table-bordered">
-        <tr>
-          <th>Hypothesis</th>
-        </tr>
+      <table class="table">
+        <tr><th>Hypothesis</th></tr>
         <tr>
           <td>$$ h_{\theta}(x) = g(\theta^{T}x)=\frac{1}{1+e^{-\theta^{T}x}} = P(y=1|x;\theta) $$</td>
         </tr>
-        <tr>
-          <th>Regularized Cost Function</th>
-        </tr>
+        <tr><th>Cost Function</th></tr>
           <td>$$ J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\log(h_{\theta}(x^{(i)}))+(1-y^{(i)})\log(1-h_{\theta}(x^{(i)}))\right] + \frac{\lambda}{2m}\sum_{j=1}^{n}\theta_j^{2}
               $$</td>
+        <tr><th>Algorithms</th></tr>
         <tr>
-          <th>Gradient Descent</th>
-        </tr>
-        <tr>
-          <td>$$ \begin{align*}
+          <td>
+            <ol>
+              <li>Gradient Descent</li>
+              $$ \begin{align*}
                  \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
                  \theta_j := & \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
                  &(j=1,...n)
                  \end{align*}
-              $$</td>
+              $$
+            </ol>
+          </td>
         </tr>
       </table>
     </div>

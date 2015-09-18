@@ -21,9 +21,6 @@
 
   </head>
   <body>
-    <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
@@ -45,89 +42,83 @@
     </nav>
 
     <div class="container">
-      <table class="table table-bordered">
-        <tr>
-          <th>Hypothesis</th>
-        </tr>
+      <table class="table">
+        <tr><th>Hypothesis</th></tr>
         <tr>
           <td>$$ \begin{align*}
                  h_\theta(x) &= \theta^{T} x \\ x_0 &= 1
                  \end{align*}
-              $$</td>
+              $$
+          </td>
         </tr>
-        <tr>
-          <th>Regularized Cost Function</th>
-        </tr>
+        <tr><th>Cost Function</th></tr>
         <tr>
           <td>$$ \begin{align*}
                  J(\theta) &= \dfrac {1}{2m} \left[ \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 + \lambda \sum _{j=1}^n \theta_j^2 \right] \\
-                           &= \dfrac {1}{2m} \left[ (X\theta - y)^T (X\theta - y) + \lambda \theta^{T}\theta \right]
+                           &= \dfrac {1}{2m} \left[ (X\theta - y)^T (X\theta - y) + \lambda (\theta^{T}\theta - \theta_0^2) \right]
                  \end{align*}
-              $$</td>
+              $$
+          </td>
         </tr>
+        <tr><th>Algorithms</th></tr>
         <tr>
-          <th>Gradient Descent</th>
-        </tr>
-        <tr>
-          <td>$$ \begin{align*}
+          <td>
+            <ol>
+              <li>Gradient Descent</li>
+              $$ \begin{align*}
                  \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
                  \theta_j := & \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
                  &(j=1,...n)
                  \end{align*}
-              $$</td>
-        </tr>
-        <tr>
-          <th>Normal Equation</th>
-        </tr>
-        <tr>
-          <td>$$ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
+              $$
+		      <li>Normal Equation</li>
+              $$ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
                            0\\
                            & 1\\
                            &  & \ddots\\
-                           &  &  & 1\end{array}\right])^{-1}X^{T}y$$</td>
+                           &  &  & 1\end{array}\right])^{-1}X^{T}y
+              $$
+            </ol>
+          </td>
+        </tr>
+        <tr><th>Gradient descent with $ n = 1, m = 6, \lambda = 0 $</th></tr>
+        <tr>
+          <td>$$ \begin{align*}
+                   h_\theta(x) &= \theta_0 + \theta_1 x \\ 
+                   J(\theta_0, \theta_1) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2
+                 \end{align*}
+              $$
+              <form class="form-inline text-center">
+                <div class="form-group">
+                  <label>\(\alpha\)</label>
+                  <input type="text" class="form-control" id="lr" size=4 value="0.001" onchange="changeLr()">
+                </div>
+                <div class="form-group">
+                  <label>\(\theta_0\)</label>
+                  <input type="text" class="form-control" id="theta0" size=4 value="0" onchange="changeTheta0()">
+                </div>
+                <div class="form-group">
+                  <label>\(\theta_1\)</label>
+                  <input type="text" class="form-control" id="theta1" size=4 value="0" onchange="changeTheta1()">
+                </div>
+                <div class="form-group">
+                  <select id="dataset" class="form-control" onchange="changeDs()">
+                    <option value="data1">Dataset 1</option>
+                    <option value="data2">Dataset 2</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="button" class="btn btn-default" id="init" value="Init" onclick="ginit()">
+                  <input type="button" class="btn btn-default" id="step" value="Step" onclick="gstep()">
+                  <input type="button" class="btn btn-default" id="run"  value="Run"  onclick="grun()">
+                </div>
+              </form>
+              <div id="graph"></div>
+              <div id="values"></div>
+          </td>
         </tr>
       </table>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Example with $ n = 1, m = 6, \lambda = 0 $</th>
-          </tr>
-          <tr>
-            <td>$$ \begin{align*}
-                   h_\theta(x) &= \theta_0 + \theta_1 x \\ 
-                   J(\theta_0, \theta_1) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2
-                   \end{align*}
-                $$</td>
-          </tr>
-        </thead>
-        <tbody class="form-inline">
-          <tr>
-            <td>
-              <label>Learning rate \(\alpha\)</label>
-              <input type="text" class="form-control" id="lr" size=4 value="0.001" onchange="changeLr()">
-              <label>Initial \(\theta_0\)</label>
-              <input type="text" class="form-control" id="theta0" size=4 value="0" onchange="changeTheta0()">
-              <label>Initial \(\theta_1\)</label>
-              <input type="text" class="form-control" id="theta1" size=4 value="0" onchange="changeTheta1()">
-              <select id="dataset" class="form-control" onchange="changeDs()">
-                <option value="data1">Dataset 1</option>
-                <option value="data2">Dataset 2</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input type="button" class="btn btn-default" id="init" value="Init" onclick="init()">
-              <input type="button" class="btn btn-default" id="step" value="Step" onclick="gstep()">
-              <input type="button" class="btn btn-default" id="run" value="Run" onclick="grun()">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div id="values"></div>
-      <div id="graph"></div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
