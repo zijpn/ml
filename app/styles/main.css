@@ -1,10 +1,6 @@
-#values {
-  width: 400px;
-  margin: 0 auto;
-}
-
 #graph {
-  width: 400px;
+  width: calc(100vw - 20px);
+  max-width: 400px;
   margin: 0 auto;
 }
 

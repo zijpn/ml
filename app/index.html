@@ -41,23 +41,23 @@
       </div>
     </nav>
 
-    <div class="container">
+    <div class="">
       <table class="table">
         <tr><th>Hypothesis</th></tr>
         <tr>
-          <td>$$ \begin{align*}
+          <td>$ \begin{align*}
                  h_\theta(x) &= \theta^{T} x \\ x_0 &= 1
                  \end{align*}
-              $$
+              $
           </td>
         </tr>
         <tr><th>Cost Function</th></tr>
         <tr>
-          <td>$$ \begin{align*}
-                 J(\theta) &= \dfrac {1}{2m} \left[ \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 + \lambda \sum _{j=1}^n \theta_j^2 \right] \\
-                           &= \dfrac {1}{2m} \left[ (X\theta - y)^T (X\theta - y) + \lambda (\theta^{T}\theta - \theta_0^2) \right]
+          <td>$ \begin{align*}
+                 J(\theta) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 + \dfrac{\lambda}{2m} \sum _{j=1}^n \theta_j^2 \\
+                           &= \dfrac {1}{2m} (X\theta - y)^T (X\theta - y) + \dfrac {\lambda}{2m} (\theta^{T}\theta - \theta_0^2)
                  \end{align*}
-              $$
+              $
           </td>
         </tr>
         <tr><th>Algorithms</th></tr>
@@ -65,23 +65,23 @@
           <td>
             <ol>
               <li>Gradient Descent</li>
-              $$ \begin{align*}
+              $ \begin{align*}
                  \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
                  \theta_j := & \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
                  &(j=1,...n)
                  \end{align*}
-              $$
+              $
 		      <li>Normal Equation</li>
-              $$ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
+              $ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
                            0\\
                            & 1\\
                            &  & \ddots\\
                            &  &  & 1\end{array}\right])^{-1}X^{T}y
-              $$
+              $
             </ol>
           </td>
         </tr>
-        <tr><th>Gradient descent with $ n = 1, m = 6, \lambda = 0 $</th></tr>
+        <tr><th>Gradient descent with \(n = 1, m = 6, \lambda = 0\)</th></tr>
         <tr>
           <td>$$ \begin{align*}
                    h_\theta(x) &= \theta_0 + \theta_1 x \\ 
@@ -114,7 +114,7 @@
                 </div>
               </form>
               <div id="graph"></div>
-              <div id="values"></div>
+              <div id="values" class="text-center"></div>
           </td>
         </tr>
       </table>
@@ -147,7 +147,13 @@
           processEscapes: true,
           preview: "none"
         },
-        "HTML-CSS": { availableFonts: ["TeX"] }
+        "HTML-CSS": {
+          availableFonts: ["TeX"],
+          linebreaks: {
+            automatic: false
+          },
+          scale: "90"
+        }
       });
     </script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
