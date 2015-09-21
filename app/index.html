@@ -45,50 +45,52 @@
       <table class="table">
         <tr><th>Hypothesis</th></tr>
         <tr>
-          <td>$ \begin{align*}
+          <td>$$ \begin{align*}
                  h_\theta(x) &= \theta^{T} x \\ x_0 &= 1
                  \end{align*}
-              $
+              $$
           </td>
         </tr>
         <tr><th>Cost Function</th></tr>
         <tr>
-          <td>$ \begin{align*}
+          <td>$$ \begin{align*}
                  J(\theta) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 + \dfrac{\lambda}{2m} \sum _{j=1}^n \theta_j^2 \\
                            &= \dfrac {1}{2m} (X\theta - y)^T (X\theta - y) + \dfrac {\lambda}{2m} (\theta^{T}\theta - \theta_0^2)
                  \end{align*}
-              $
+              $$
           </td>
         </tr>
         <tr><th>Algorithms</th></tr>
         <tr>
           <td>
             <ol>
-              <li>Gradient Descent</li>
-              $ \begin{align*}
+              <li>Gradient Descent
+              $$ \begin{align*}
                  \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
                  \theta_j := & \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
                  &(j=1,...n)
                  \end{align*}
-              $
-		      <li>Normal Equation</li>
-              $ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
+              $$
+              </li>
+		      <li>Normal Equation
+              $$ \theta = (X^TX + \lambda \left[\begin{array}{cccc}
                            0\\
                            & 1\\
                            &  & \ddots\\
                            &  &  & 1\end{array}\right])^{-1}X^{T}y
-              $
+              $$
+              </li>
             </ol>
           </td>
         </tr>
         <tr><th>Gradient descent with \(n = 1, m = 6, \lambda = 0\)</th></tr>
-        <tr>
+        <tr class="text-center">
           <td>$$ \begin{align*}
                    h_\theta(x) &= \theta_0 + \theta_1 x \\ 
                    J(\theta_0, \theta_1) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2
                  \end{align*}
               $$
-              <form class="form-inline text-center">
+              <form class="form-inline">
                 <div class="form-group">
                   <label>\(\alpha\)</label>
                   <input type="text" class="form-control" id="lr" size=4 value="0.001" onchange="changeLr()">
