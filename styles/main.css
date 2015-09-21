@@ -1,1 +1,1 @@
-#graph,#values{width:400px;margin:0 auto}path{fill:none;stroke:#000}.reg{stroke:#4682b4;stroke-width:2}
+#graph{width:calc(100vw - 20px);max-width:400px;margin:0 auto}path{fill:none;stroke:#000}.reg{stroke:#4682b4;stroke-width:2}
