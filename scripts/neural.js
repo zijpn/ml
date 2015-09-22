@@ -1,0 +1,1 @@
+window.MathJax={messageStyle:"none",extensions:["tex2jax.js"],TeX:{extensions:["AMSmath.js","AMSsymbols.js"]},jax:["input/TeX","output/HTML-CSS"],tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0,preview:"none"},"HTML-CSS":{availableFonts:["TeX"],linebreaks:{automatic:!0},scale:"90"}};
