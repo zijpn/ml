@@ -49,7 +49,7 @@ gulp.task('html', ['styles'], () => {
 });
 
 gulp.task('images', () => {
-  return gulp.src('app/images/**/*')
+  return gulp.src(['app/images/**/*','!app/images/**/*.xml'])
     .pipe($.if($.if.isFile, $.cache($.imagemin({
       progressive: true,
       interlaced: true,
