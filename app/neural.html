@@ -58,7 +58,7 @@
                  l &= \mbox{one layer in } [1..L] \\
                  g &= \mbox{sigmoid function} \\
                  a^{(l)} &= \mbox{activation vector of layer } l \\
-                 \Theta^{(l)} &= s_{(l+1)} \times (s_{l} + 1) \mbox{ matrix}
+                 \Theta^{(l)} &\in \mathbb{R}^{s_{(l+1)} \times (s_{l} + 1)}
                  \end{align*}
               $$
           </td>
@@ -67,14 +67,14 @@
         <tr>
           <td>$$ \begin{align*}
                  J(\Theta) = & -\frac{1}{m}\left[ \sum_{i=1}^{m} \sum_{k=1}^{K} y_k^{(i)} log(h_\Theta(x^{(i)}))_k + (1-y_k^{(i)})log(1-(h_\Theta(x^{i}))_k) \right] \\
-                             & + \frac{\lambda}{2m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} (\Theta_{ji}^{l})^2
+                             & + \frac{\lambda}{2m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} (\Theta_{ji}^{(l)})^2
                   \end{align*}
               $$
               where
               $$ \begin{align*}
                  s_l &= \mbox{# of units (not counting bias unit) in layer } l \\
                  s_L &= \mbox{# of output units } = K \\
-                 \Theta_{ji}^l &= \mbox{weight from layer } l \mbox{ mapping } a_{i}^{(l)} \mbox { to } a_{j}^{(l+1)}
+                 \Theta_{ji}^{(l)} &= \mbox{weight from layer } l \mbox{ mapping } a_{i}^{(l)} \mbox { to } a_{j}^{(l+1)}
                  \end{align*}
               $$
           </td>
@@ -90,7 +90,22 @@
           <td>
             <ol>
               <li>Backpropagation
-
+              $$ \begin{align*}
+                 D_{ij}^{(l)} &:= \frac{1}{m} \Delta_{ij}^{(l)} & (j = 0)\\
+                 D_{ij}^{(l)} &:= \frac{1}{m} \Delta_{ij}^{(l)} + \lambda\Theta_{ij}^{(l)} & (j \neq 0) 
+                 \end{align*}
+              $$
+              where
+              $$ \begin{align*}
+                 \Delta_{ij}^{(l)} &:= \Delta_{ij}^{(l)} + a_{j}^{(l)}\delta_{i}^{(l+1)} \\
+                 \end{align*}
+              $$
+              and
+              $$ \begin{align*}
+                 \delta^{(L)} &= a^{(L)} - y &\\
+                 \delta^{(l)} &= (\Theta^{(l)})^T \delta^{(l+1)} .* (a^{(l)}.*(1-a^{(l)})) & (l>1)
+                 \end{align*}
+              $$
               </li>
             </ol>
           </td>
