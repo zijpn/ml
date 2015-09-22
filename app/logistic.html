@@ -46,8 +46,10 @@
       <table class="table">
         <tr><th>Hypothesis</th></tr>
         <tr>
-          <td>$$ 
-              h_{\theta}(x) = g(\theta^{T}x)=\frac{1}{1+e^{-\theta^{T}x}} = P(y=1|x;\theta)
+          <td>$$ \begin{align*}
+                 h_{\theta}(x) &= g(\theta^{T}x)=\frac{1}{1+e^{-\theta^{T}x}} \\
+                               &= P(y=1|x;\theta)
+                 \end{align*}
               $$
               where
               <div class="text-center">
@@ -66,8 +68,8 @@
             <ol>
               <li>Gradient Descent
               $$ \begin{align*}
-                 \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
-                 \theta_j := & \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
+                 \theta_0 &:= \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_0^{(i)} \\
+                 \theta_j &:= \theta_j(1-\alpha\frac{\lambda}{m}) - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) x_j^{(i)} \\
                  &(j=1,...n)
                  \end{align*}
               $$
@@ -89,32 +91,6 @@
     </script>
     -->
 
-    <!-- https://github.com/mathjax/mathjax-docs/wiki/Hide-render-statusbar -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        messageStyle: "none",
-        extensions: ["tex2jax.js"],
-        TeX: {
-          extensions: ["AMSmath.js","AMSsymbols.js"]
-        },
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          preview: "none"
-        },
-        "HTML-CSS": {
-          availableFonts: ["TeX"],
-          linebreaks: {
-            automatic: false
-          },
-          scale: "90"
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -123,7 +99,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/main.js -->
+    <!-- build:js scripts/logistic.js -->
+    <script src="scripts/mathjax-config.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
   </body>
 </html>

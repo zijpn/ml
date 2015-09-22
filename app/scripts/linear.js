@@ -106,7 +106,9 @@ function update(sse)
               '\\(\\theta_1 = ' + d3.round(theta1, 4) + '\\)<br/>' +
               '\\(SSE = ' + d3.round(sse, 2) + '\\)<br/>');
     /*eslint-disable new-cap*/
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'values']);
+    if (MathJax.Hub) {
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'values']);
+    }
     /*eslint-enable new-cap*/
     updateGraph();
 }

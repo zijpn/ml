@@ -42,7 +42,7 @@
       </div>
     </nav>
 
-    <div class="">
+    <div class="container-fixed">
       <table class="table">
         <tr><th>Hypothesis</th></tr>
         <tr>
@@ -143,32 +143,6 @@
     </script>
     -->
 
-    <!-- https://github.com/mathjax/mathjax-docs/wiki/Hide-render-statusbar -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        messageStyle: "none",
-        extensions: ["tex2jax.js"],
-        TeX: {
-          extensions: ["AMSmath.js","AMSsymbols.js"]
-        },
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          preview: "none"
-        },
-        "HTML-CSS": {
-          availableFonts: ["TeX"],
-          linebreaks: {
-            automatic: false
-          },
-          scale: "90"
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -177,8 +151,12 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/main.js -->
+    <!-- build:js scripts/linear.js -->
+    <script src="scripts/mathjax-config.js"></script>
     <script src="scripts/linear.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
   </body>
 </html>

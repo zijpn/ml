@@ -42,7 +42,7 @@
       </div>
     </nav>
 
-    <div class="">
+    <div class="container-fixed">
       <table class="table">
         <tr><th>Hypothesis</th></tr>
         <tr>
@@ -58,7 +58,7 @@
                  l &= \mbox{one layer in } [1..L] \\
                  g &= \mbox{sigmoid function} \\
                  a^{(l)} &= \mbox{activation vector of layer } l \\
-                 \Theta^{(l)} & \mbox{ has dimensions } s_{(l+1)} \times (s_{l} + 1)
+                 \Theta^{(l)} &= s_{(l+1)} \times (s_{l} + 1) \mbox{ matrix}
                  \end{align*}
               $$
           </td>
@@ -72,9 +72,9 @@
               $$
               where
               $$ \begin{align*}
-                 s_l &= \mbox{number of units (not counting bias unit) in layer } l \\
-                 s_L &= \mbox{number of output units } = K \\
-                 \Theta_{ji}^l &= \mbox{parameter (aka weight) from layer } l \mbox{ mapping } a_{i}^{(l)} \mbox { to } a_{j}^{(l+1)}
+                 s_l &= \mbox{# of units (not counting bias unit) in layer } l \\
+                 s_L &= \mbox{# of output units } = K \\
+                 \Theta_{ji}^l &= \mbox{weight from layer } l \mbox{ mapping } a_{i}^{(l)} \mbox { to } a_{j}^{(l+1)}
                  \end{align*}
               $$
           </td>
@@ -82,6 +82,11 @@
         <tr><th>Algorithms</th></tr>
         <tr>
           <td>
+            <ol>
+              <li>Backpropagation
+
+              </li>
+            </ol>
           </td>
         </tr>
       </table>
@@ -98,32 +103,6 @@
     </script>
     -->
 
-    <!-- https://github.com/mathjax/mathjax-docs/wiki/Hide-render-statusbar -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        messageStyle: "none",
-        extensions: ["tex2jax.js"],
-        TeX: {
-          extensions: ["AMSmath.js","AMSsymbols.js"]
-        },
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          preview: "none"
-        },
-        "HTML-CSS": {
-          availableFonts: ["TeX"],
-          linebreaks: {
-            automatic: false
-          },
-          scale: "90"
-        }
-      });
-    </script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -132,7 +111,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/main.js -->
+    <!-- build:js scripts/neural.js -->
+    <script src="scripts/mathjax-config.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
   </body>
 </html>
