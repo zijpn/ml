@@ -92,7 +92,7 @@
               <li>Backpropagation
               $$ \begin{align*}
                  D_{ij}^{(l)} &:= \frac{1}{m} \Delta_{ij}^{(l)} & (j = 0)\\
-                 D_{ij}^{(l)} &:= \frac{1}{m} \Delta_{ij}^{(l)} + \lambda\Theta_{ij}^{(l)} & (j \neq 0) 
+                 D_{ij}^{(l)} &:= \frac{1}{m} \left[ \Delta_{ij}^{(l)} + \lambda\Theta_{ij}^{(l)} \right] & (j \neq 0) 
                  \end{align*}
               $$
               where
@@ -102,8 +102,9 @@
               $$
               and
               $$ \begin{align*}
+                 \delta_{i}^{(l)} &= \mbox{'error' of node } i \mbox{ in layer } l \\
                  \delta^{(L)} &= a^{(L)} - y &\\
-                 \delta^{(l)} &= (\Theta^{(l)})^T \delta^{(l+1)} .* (a^{(l)}.*(1-a^{(l)})) & (l>1)
+                 \delta^{(l)} &= ((\Theta^{(l)})^T \delta^{(l+1)}) .* a^{(l)}.*(1-a^{(l)})
                  \end{align*}
               $$
               </li>
@@ -112,17 +113,6 @@
         </tr>
       </table>
     </div>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='https://www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-    -->
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
