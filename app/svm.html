@@ -37,18 +37,50 @@
             <li><a href="linear.html">Linear Regression</a></li>
             <li><a href="logistic.html">Logistic Regression</a></li>
             <li><a href="neural.html">Neural Network</a></li>
-            <li><a href="svm.html">Support Vector Machine</a></li>
+            <li class="active"><a href="svm.html">Support Vector Machine</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container-fixed">
-      <img src="https://coursera.s3.amazonaws.com/topics/ml/large-icon.png" class="img-responsive center-block">
-      <div class="text-center">
-        <a href="https://www.coursera.org/learn/machine-learning"><h2>course</h2></a>
-        <a href="https://share.coursera.org/wiki/index.php/ML:Main"><h2>wiki</h2></a>
-      </div>
+    <div class="">
+      <table class="table">
+        <tr><th>Hypothesis</th></tr>
+        <tr>
+          <td>$$
+               h_\theta(x) = 
+                \begin{cases}
+                  1 & \text{if} \ \theta^Tx \geq 0 \\
+                  0 & \text{otherwise}
+                \end{cases}    
+              $$  
+          </td>
+        </tr>
+        <tr><th>Cost Function</th></tr>
+        <tr>
+          <td>$$
+              J(\theta) = C\sum_{i=1}^m y^{(i)} \ \text{cost}_1(\theta^Tx^{(i)}) + (1 - y^{(i)}) \ \text{cost}_0(\theta^Tx^{(i)}) + \dfrac{1}{2}\sum_{j=1}^n \theta^2_j
+              $$
+              where
+              $$
+              C = \text{regularization parameter} = \frac{1}{\lambda}
+              $$
+          </td>
+        </tr>
+        <tr><th>Algorithms</th></tr>
+        <tr>
+          <td>
+            Use <i>libsvm</i> and choose parameters
+            <ul>
+              <li>Larger \(C\) gives higher variance</li>
+            </ul>
+            Other (non-linear) kernels have extra parameters
+            <ul>
+              <li>Gaussian: larger \(\sigma^2\) gives higher bias</i>
+            </ul>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <!-- build:js scripts/vendor.js -->
@@ -59,7 +91,11 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/main.js -->
+    <!-- build:js scripts/logistic.js -->
+    <script src="scripts/mathjax-config.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+
   </body>
 </html>

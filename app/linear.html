@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Machine Learning Demos">
+    <meta name="description" content="Machine Learning">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ML Demos</title>
+    <title>Machine Learning</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -30,13 +30,14 @@
             <span class='icon-bar'></span>
             <span class='icon-bar'></span>
           </button>
-          <a class="navbar-brand" href="index.html">ML Demos</a>
+          <a class="navbar-brand" href="index.html">Machine Learning</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="linear.html">Linear Regression</a></li>
             <li><a href="logistic.html">Logistic Regression</a></li>
             <li><a href="neural.html">Neural Network</a></li>
+            <li><a href="svm.html">Support Vector Machine</a></li>
           </ul>
         </div>
       </div>
@@ -56,7 +57,6 @@
         <tr>
           <td>$$ \begin{align*}
                  J(\theta) &= \dfrac {1}{2m} \sum _{i=1}^m \left (h_\theta (x^{(i)}) - y^{(i)} \right)^2 + \dfrac{\lambda}{2m} \sum _{j=1}^n \theta_j^2 \\
-                           &= \dfrac {1}{2m} (X\theta - y)^T (X\theta - y) + \dfrac {\lambda}{2m} (\theta^{T}\theta - \theta_0^2)
                  \end{align*}
               $$
           </td>
@@ -106,16 +106,22 @@
               $$
               <form class="form-inline">
                 <div class="form-group">
-                  <label>\(\alpha\)</label>
-                  <input type="text" class="form-control" id="lr" size=4 value="0.001" onchange="changeLr()">
+                  <div class="input-group">
+                    <div class="input-group-addon">\(\alpha\)</div>
+                    <input type="text" class="form-control" id="lr" size=4 value="0.001" onchange="changeLr()">
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label>\(\theta_0\)</label>
-                  <input type="text" class="form-control" id="theta0" size=4 value="0" onchange="changeTheta0()">
+                  <div class="input-group">
+                    <div class="input-group-addon">\(\theta_0\)</div>
+                    <input type="text" class="form-control" id="theta0" size=4 value="0" onchange="changeTheta0()">
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label>\(\theta_1\)</label>
-                  <input type="text" class="form-control" id="theta1" size=4 value="0" onchange="changeTheta1()">
+                  <div class="input-group">
+                    <div class="input-group-addon">\(\theta_1\)</div>
+                    <input type="text" class="form-control" id="theta1" size=4 value="0" onchange="changeTheta1()">
+                  </div>
                 </div>
                 <div class="form-group">
                   <select id="dataset" class="form-control" onchange="changeDs()">
