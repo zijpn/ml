@@ -72,6 +72,11 @@ gulp.task('fonts', () => {
     .pipe(gulp.dest('dist/fonts'));
 });
 
+gulp.task('jekyll', function(done) {
+  var cp = require('child_process');
+  return cp.spawn('jekyll', ['build', '-s', 'app', '-d', '.tmp'], {stdio: 'inherit'}).on('close', done);
+});
+
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',

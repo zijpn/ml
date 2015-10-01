@@ -5,7 +5,7 @@
 
 http://zijpn.github.io/ml/
 
-Based on https://github.com/larskotthoff/ml-demo
+Linear regression example based on https://github.com/larskotthoff/ml-demo
 
 ### Stanford course (by Andrew Ng)
 - [Coursera](https://www.coursera.org/learn/machine-learning)
@@ -23,3 +23,7 @@ $ yo gulp-webapp
 $ sudo npm install -g generator-travis-ci
 $ yo travis-ci:gh-pages
 ```
+
+### Todo
+- jekyll templating
+- gulp 4
